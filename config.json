@@ -1,0 +1,7 @@
+{
+    "sasslint": ["./styles/**/*.scss"],
+    "tslint": ["./src/**/*.ts"],
+    "styleDependency": ["ej2", "./styles"],
+    "ts": ["./src/**/*.ts"],
+    "isShowCase": true
+}

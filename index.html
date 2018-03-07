@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Essential JS 2 for TypeScript - Webmail</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Essential JS 2 for TypeScript - Webmail" />
+    <meta name="author" content="Syncfusion" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href='styles/styles.css' rel='stylesheet' />
+    <link href='styles/Outlook Icons/style.css' rel='stylesheet' />
+    <link href='styles/css/outlook.css' rel='stylesheet' />
+    <script type="text/javascript">
+        if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"><\/script>');
+        }
+    </script> 
+    <script src='dist/common.js' type='text/javascript'></script>
+</head>
+
+<body>
+    <div class='outlook-container'>
+        <div class='header navbar'>
+            <div class='container-fluid' style="font-size: 0; white-space: nowrap; line-height: normal">
+                <div style="display: table-cell">
+                    <div class='home-btn'>
+                        <span class='ej-icon-Bento' style='font-size: 18px;'></span>
+                    </div>
+                    <div style='margin-left: 15px;display: inline-block'>
+                        <span class='home-btn-text'>Webmail</span>
+                    </div>
+                </div>
+                <div style="display: table-cell; width: 100%; text-align: center">
+                </div>
+                <div id="notification-div" class="header-right-pane">  
+                    <div style="pointer-events: none;">
+                        <button id='btnNotification' style="min-width: 52px"></button>
+                    </div>
+                </div>
+                <div id="settings-div" class="header-right-pane">  
+                    <div style="pointer-events: none;">
+                        <button id='btnSettings' style="min-width: 52px"></button>
+                    </div>
+                </div>
+                <div id="about-div" class="header-right-pane">  
+                    <div style="pointer-events: none;">
+                        <button id='btnAbout' style="min-width: 52px"></button>
+                    </div>
+                </div>
+                <div id="profile-div" class="header-right-pane"> 
+                    <div style="right: 0px;position: absolute;top: 3px;pointer-events: none;margin-right: 5px;">
+                        <div class='logo logo-style1 profile-pic'></div>
+                    </div>  
+                    <div style="margin-right: 44px; pointer-events: none;">
+                        <button id='btnLoginName' class="btn-profile" style="min-width: 88px;font-weight: normal"></button>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div id="content-area" style="height: 100%">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "name": "@syncfusion/ej2-ts-outlook",
+  "version": "0.0.1",
+  "description": "Essential JS 2 - Outlook",
+  "author": "Syncfusion Inc.",
+  "license": "SEE LICENSE IN license",
+  "dependencies": {
+    "browser-sync": "^2.23.6",
+    "crossroads": "^0.12.2",
+    "hasher": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^3.4.28",
+    "@types/hasher": "0.0.27",
+    "@types/crossroads": "0.0.28",
+    "@types/jasmine": "^2.2.29",
+    "@types/jasmine-ajax": "^3.1.27",
+    "@types/requirejs": "^2.1.26",
+    "@syncfusion/ej2-base": "*",
+    "@syncfusion/ej2-navigations": "*",
+    "@syncfusion/ej2-lists": "*",
+    "@syncfusion/ej2-buttons": "*",
+    "@syncfusion/ej2-dropdowns": "*",
+    "@syncfusion/ej2-inputs": "*",
+    "@syncfusion/ej2-popups": "*",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-print": "^2.0.1",
+    "gulp-tslint": "^7.0.1",
+    "gulp-sass-lint": "^1.1.1",
+    "gulp-typescript": "^2.13.0",
+    "tslint": "4.0.2",
+    "run-sequence": "2.2.0",
+    "typescript": "2.3.3",
+    "webpack": "2.5.1",
+    "webpack-stream": "^3.2.0"
+  },
+  "keywords": [
+    "ej2",
+    "syncfusion",
+    "sample-name"
+  ],
+  "scripts": {
+    "test": "gulp ci-test",
+    "compile": "gulp ci-compile",
+    "ci-publish": "gulp publish-samples",
+    "build": "gulp lint && gulp build"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "gulp pre-commit",
+      "pre-push": "gulp pre-push",
+      "commit-msg": "gulp commit-msg"
+    }
+  }
+}

@@ -1,0 +1,217 @@
+<div class='row content'>
+    <div class='sidebar' style='height:100%' role='complementary'>
+        <div style='background-color:#fff; width:100%;height:100%'>
+            <div class="search-div">
+                <div class="search-device-section">
+                    <div style="width: 84%; float: left; height: 40px">
+                        <input type='text' id='txtSearch' tabindex='1' style="height: 40px" />
+                    </div>
+                    <div style="float: right; margin: 4px 0px;">
+                        <button id='btnSearch'></button>
+                    </div>
+                </div>
+                <div class="search-mobile-section">
+                    <div class='logo logo-style3 profile-pic' style='float:left'></div>
+                    <div class='messageHeader' style='float:left; height: 50px;'>
+                        <div id="username" style="font-size: 17px;color:#333"></div>
+                        <div id="usermail" style="font-size: 12px; color: #666"></div>
+                    </div>
+                    <div style="right:20px;position: absolute;">
+                        <button id='btnCloseButton1'></button>
+                    </div>
+                </div>
+            </div>
+            <div class="folder-pane customScrollBar">
+                <div id='tree'></div>
+            </div>
+        </div>
+    </div>
+    <div class="headerContent" style="z-index: 112; height: 100%; background-color: #f4f4f4; width: 330px;right:0; position: absolute">
+        <div style="right:20px;position: absolute; top: 35px">
+            <button id='btnCloseButton'></button>
+        </div>
+        <div style="margin: 25px 20px 30px 30px;">
+            <div class="text-content">
+                <span id='txtHeaderContent'>Notification</span>
+            </div>
+        </div>
+        <div class="notification-content">
+            <span>Nothing new right now</span>
+        </div>
+        <div class="settings-content">
+            <span class="settings-sub-header">Your app settings</span>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Automatic replies</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Display settings</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Offline settings</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Manage add-ins</span>
+                </a>
+            </div>
+        </div>
+        <div class="about-content">
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Help</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Feedback</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Community</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Legal</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span>Privacy & cookies</span>
+                </a>
+            </div>
+        </div>
+        <div class="profile-content">
+            <div class='logo logo-style2' style='float:left'></div>
+            <div class='messageHeader' style='float:left; height: 70px; margin-bottom: 13px;'>
+                <div id="username1" style="font-size: 17px"></div>
+                <div id="usermail1" style="font-size: 12px; color: #666"></div>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span style="font-size: 14px">My profile</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span style="font-size: 14px">My account</span>
+                </a>
+            </div>
+            <div class="anchor-div">
+                <a class="about-anchor">
+                    <span style="font-size: 14px">Sign Out</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class='content-wrapper' role='main'>
+        <div class='content' style='height:100%'>
+            <div class="e-roottools" style='background-color:#fff; width:100%;color:white'>
+                <div id='toolbar_align'>
+                </div>
+                <div id='toolbar_mobile'>
+                </div>
+            </div>
+            <div class='maincontent_pane' style='background-color:#fff; width:100%;height:calc(100% - 40px);color:white'>
+                <div class='message-pane customScrollBar' style='overflow: auto'>
+                    <div class="filter-section">
+                        <div style='float: left; margin-top: 5px;'>
+                            <span id="spanFilterText" style='font-size: 22px;color:#333333'>Inbox</span>
+                        </div>
+                        <div style='right:25px; position: absolute; top:10px'>
+                            <span style='font-size: 16px; color: #0078D7'>Filter</span>
+                            <button id='btnFilter' style='color: #0078D7'></button>
+                        </div>
+                    </div>
+                    <div id='listview-grp' tabindex='1'></div>
+                </div>
+                <div id='reading-pane-div' class='reading-pane customScrollBar'>
+                    <div id='emptyMessageDiv' style='width: 100%;text-align: center; vertical-align: middle; padding: 15px;height:100%; background-color:#fff;'>
+                        <div style="top:35%; left: 40%; position: absolute; display: block">
+                            <div class="emptyImageDiv"></div>
+                            <br/>
+                            <span class="emptyDivText">Choose a message to read it.</span>
+                        </div>
+                    </div>
+                    <div id='accordian' style='display: none;'></div>
+                    <div id='mailarea' style='display: none; height:100%; background-color:#fff;'>
+                    </div>
+                    <div id="newmailContent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='accodianContent' style='display: none'>
+        <div style='height: 100px'>
+            <div class='logo logo-style2' style='float:left'></div>
+            <div class='messageHeader' style='float:left'>
+                <div id='sub' style="font-size: 17px"></div>
+                <div id='date' style="font-size: 11px; color: #666;"></div>
+                <div id='to' style="font-size: 12px;"></div>
+            </div>
+            <div style="right:0;position: absolute;">
+
+            </div>
+        </div>
+        <div id='accContent'>
+        </div>
+    </div>
+    <div id='reading-pane-popup'>
+
+    </div>
+    <div class="overlay-element">
+    </div>
+</div>
+<ul id='treeContextMenu'></ul>
+<ul id='moveToMenuItems'></ul>
+<ul id='categoryMenuItems'></ul>
+<ul id='moreMenuItems'></ul>
+<ul id='filterContextMenu'></ul>
+<div id="favoriteDialog">
+</div>
+<div id="deleteDialog">
+</div>
+<div id="sentMailDialog">
+</div>
+<div id="discardDialog">
+</div>
+<div id="newMailSeparateDialog">
+</div>
+<div id="replyAllSeparateDialog">
+</div>
+<div id="sentMailNewWindow">
+</div>
+<div id="discardNewWindow">
+</div>
+<div id="popup" style="position:absolute;width:320px">
+    <div id='popupContent' style="padding:10px 10px; width: 320px; height: 85px; background-color:#F2F2F2; color:#252525">
+        <div style="float:left;pointer-events: none;">
+            <div>
+                <div id='popup-image' class='logo logo-style1 popup-logo-style'></div>
+            </div>
+        </div>
+        <div style="left: 65px; top:5px; position: absolute;pointer-events: none;">
+            <div style="margin-top: 2px">
+                <span id='popup-contact' class="popup-subjectstyle-text" style="font-size:16px;font-weight:bold"> Richelle Mead </span>
+            </div>
+            <div class="popup-subjectstyle">
+                <span id='popup-subject' class="popup-subjectstyle-text"> Networking Referral </span>
+            </div>
+            <div class="popup-subjectstyle">
+                <span id='popup-message-content' class="popup-subjectstyle-text"> Dear Kelly, I was being referred to you by George Peterson from ROYALES Company in New York. He was ...</span>
+            </div>
+        </div>
+        <div style="left:300px;position:absolute;font-size: 12px;">
+            <span class="e-btn-icon ej-icon-Close"></span>
+        </div>
+    </div>
+</div>
