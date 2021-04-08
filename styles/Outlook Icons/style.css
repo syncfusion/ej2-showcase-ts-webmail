@@ -227,3 +227,16 @@
   content: "\e94f";
   color: #fff100;
 }
+.e-listview:not(.e-list-template) .e-list-item {
+  height: 85px;
+  line-height: 1.42857143;
+}
+
+.e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
+  content: '';
+  font-family: 'e-icons';
+}
+
+.e-treeview .e-list-item div.e-icons::before {
+  content: "";
+}
