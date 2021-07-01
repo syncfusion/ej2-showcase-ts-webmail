@@ -39,7 +39,7 @@ function createMailForm(): void {
         popupWidth: '300px',
         itemTemplate: '<div class="multiselect-template parent-div"><img class="contacts-item-image-style"' +
         'src="${Image}" alt="employee"/>' +
-        '<div class="contacts-item-text-style"> <div> ${ContactName} </div> </div>' +
+        '<div class="contacts-item-text-style"> <div> ${text} </div> </div>' +
         '<div class="contacts-item-subtext-style"> ${MailId} </div>' +
         '</div>',
         valueTemplate: '<div>'
@@ -49,7 +49,7 @@ function createMailForm(): void {
         allowFiltering: true,
         filtering: (e: FilteringEventArgs) => {
             let query: Query = new Query();
-            query = (e.text !== '') ? query.where('ContactName', 'startswith', e.text, true) : query;
+            query = (e.text !== '') ? query.where('text', 'startswith', e.text, true) : query;
             e.updateData(getContacts(), query);
         }
     });
@@ -62,7 +62,7 @@ function createMailForm(): void {
         popupWidth: '300px',
         itemTemplate: '<div class="multiselect-template parent-div"><img class="contacts-item-image-style"' +
         'src="${Image}" alt="employee"/>' +
-        '<div class="contacts-item-text-style"> <div> ${ContactName} </div> </div>' +
+        '<div class="contacts-item-text-style"> <div> ${text} </div> </div>' +
         '<div class="contacts-item-subtext-style"> ${MailId} </div>' +
         '</div>',
         valueTemplate: '<div>'
@@ -72,7 +72,7 @@ function createMailForm(): void {
         allowFiltering: true,
         filtering: (e: FilteringEventArgs) => {
             let query: Query = new Query();
-            query = (e.text !== '') ? query.where('ContactName', 'startswith', e.text, true) : query;
+            query = (e.text !== '') ? query.where('text', 'startswith', e.text, true) : query;
             e.updateData(getContacts(), query);
         }
     });

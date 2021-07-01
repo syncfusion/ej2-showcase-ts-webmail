@@ -160,7 +160,7 @@ function createMailForm(): void {
         hideSelectedItem: true,
         itemTemplate: '<div class="multiselect-template parent-div"><img class="contacts-item-image-style"' +
         'src="${Image}" alt="employee"/>' +
-        '<div class="contacts-item-text-style"> <div> ${ContactName} </div> </div>' +
+        '<div class="contacts-item-text-style"> <div> ${text} </div> </div>' +
         '<div class="contacts-item-subtext-style"> ${MailId} </div>' +
         '</div>',
         valueTemplate: '<div style="width:100%;height:100%;">'
@@ -170,7 +170,7 @@ function createMailForm(): void {
         allowFiltering: true,
         filtering: (e: FilteringEventArgs) => {
             let query: Query = new Query();
-            query = (e.text !== '') ? query.where('ContactName', 'startswith', e.text, true) : query;
+            query = (e.text !== '') ? query.where('text', 'startswith', e.text, true) : query;
             e.updateData(getContacts(), query);
         }
     });
@@ -184,7 +184,7 @@ function createMailForm(): void {
         hideSelectedItem: true,
         itemTemplate: '<div class="multiselect-template parent-div"><img class="contacts-item-image-style"' +
         'src="${Image}" alt="employee"/>' +
-        '<div class="contacts-item-text-style"> <div> ${ContactName} </div> </div>' +
+        '<div class="contacts-item-text-style"> <div> ${text} </div> </div>' +
         '<div class="contacts-item-subtext-style"> ${MailId} </div>' +
         '</div>',
         valueTemplate: '<div style="width:100%;height:100%;">'
@@ -194,7 +194,7 @@ function createMailForm(): void {
         allowFiltering: true,
         filtering: (e: FilteringEventArgs) => {
             let query: Query = new Query();
-            query = (e.text !== '') ? query.where('ContactName', 'startswith', e.text, true) : query;
+            query = (e.text !== '') ? query.where('text', 'startswith', e.text, true) : query;
             e.updateData(getContacts(), query);
         }
     });
@@ -294,7 +294,7 @@ export function bindReadingPaneData(selectedMessage1: {[key: string]: Object}): 
     key = 'Image';
     (headerTitle.getElementsByClassName('logo logo-style2')[0] as HTMLElement).style.background =
         'url(' + selectedMessage[key].toString().replace('styles/images/images/', 'styles/images/large/') + ')  no-repeat 50% 50%';
-    key = 'ContactName';
+    key = 'text';
     document.getElementById('rp-sub').innerHTML = selectedMessage[key].toString();
     key = 'Date';
     let dateString: string = selectedMessage[key].toString();
