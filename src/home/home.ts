@@ -34,8 +34,10 @@ let acrdnObj: Accordion = new Accordion();
 let treeObj: TreeView = new TreeView();
 let toolbarHeader: Toolbar = new Toolbar();
 let toolbarMobile: Toolbar = new Toolbar();
-let treeContextMenu: ContextMenu = new ContextMenu();
-let filterContextMenu: ContextMenu = new ContextMenu();
+  // tslint:disable-next-line:no-any
+let treeContextMenu: any = new ContextMenu();
+  // tslint:disable-next-line:no-any
+let filterContextMenu: any = new ContextMenu();
 let selectedListElement: HTMLElement = null;
 let acSearchMobile: AutoComplete = new AutoComplete();
 let popup1: Popup;
@@ -110,7 +112,7 @@ function renderMainSection(): void {
     grpListObj = new ListView({
         dataSource: messageDataSource,
         template: getListTemplate(),
-        fields: { id: 'ContactID' },
+        fields: { id: 'ContactID', text: 'text' },
         sortOrder: 'None'
     });
     grpListObj.select = select;
@@ -347,7 +349,7 @@ function renderToolbarMobile(): void {
 function getListTemplate(): string {
     return '<div class="template-container ${ReadStyle}-parent">' +
         '<div style="height:30px; pointer-events:none;">' +
-        '<div class="sender-style" style="float:left; margin-top: 2px">${ContactName}</div>' +
+        '<div class="sender-style" style="float:left; margin-top: 2px">${text}</div>' +
         '<div style="right:25px; position: absolute; margin-top: 2px; pointer-events:all;">' +
         '<button id="btnListDelete" title="Delete" class="listview-btn">' +
         '<span class="e-btn-icon ej-icon-Delete"></span>' +
@@ -601,7 +603,7 @@ function select(args: SelectEventArgs): void {
     key = 'Image';
     (headerTitle.getElementsByClassName('logo logo-style2')[0] as HTMLElement).style.background =
         'url(' + data[key].toString().replace('styles/images/images/', 'styles/images/large/') + ')  no-repeat 50% 50%';
-    key = 'ContactName';
+    key = 'text';
     document.getElementById('sub').innerHTML = data[key].toString();
     key = 'Date';
     let dateString: string = data[key].toString();
@@ -1022,7 +1024,8 @@ function toolbarClick(args: ClickEventArgs): void {
             let selectedMessage: { [key: string]: Object } = getSelectedMessage();
             messageDataSource.splice(messageDataSource.indexOf(selectedMessage), 1);
             let key: string = 'ContactID';
-            grpListObj.removeItem({ id: selectedMessage[key].toString() });
+            let contactName: string = 'text';
+            grpListObj.removeItem({ id: selectedMessage[key].toString(), text: selectedMessage[contactName].toString() });
             if (args.item.prefixIcon === 'ej-icon-Delete' && window.innerWidth < 605) {
                 let contentElement: Element = document.getElementsByClassName('row content')[0];
                 contentElement.className = contentElement.className.replace('show-reading-pane', 'show-message-pane');
@@ -1253,7 +1256,8 @@ function documentClick(evt: MouseEvent): void {
                     if (target.className.indexOf('ej-icon-Delete') !== -1) {
                         messageDataSource.splice(messageDataSource.indexOf(selectedMessage), 1);
                         key = 'ContactID';
-                        grpListObj.removeItem({ id: selectedMessage[key].toString() });
+                        let contactName: string = 'text';
+                        grpListObj.removeItem({ id: selectedMessage[key].toString(), text: selectedMessage[contactName].toString() });
                     } else if (target.className.indexOf('ej-icon-Flag_1') !== -1) {
                         flagListItem(target, selectedMessage);
                     } else if (target.className.indexOf('ej-icon-Mark-as-read') !== -1 && !isItemClick) {
@@ -1320,7 +1324,8 @@ function readingPaneItemClick(): void {
             let selectedMessage: { [key: string]: Object } = getSelectedMessage();
             messageDataSource.splice(messageDataSource.indexOf(selectedMessage), 1);
             let key: string = 'ContactID';
-            grpListObj.removeItem({ id: selectedMessage[key].toString() });
+            let contactName: string = 'text';
+            grpListObj.removeItem({ id: selectedMessage[key].toString(), text: selectedMessage[contactName].toString() });
             showEmptyMessage();
             dlgReplyAllWindow.hide();
         } else if (selectedRPToolbarItem === 'ClosePopup') {
@@ -1400,7 +1405,7 @@ function hidePopup(): void {
 }
 function openPopup(): void {
     let newMessageData: { [key: string]: Object } = cloneObject(messageDataSource[Math.floor(Math.random() * (50 - 3) + 2)]);
-    let key: string = 'ContactName';
+    let key: string = 'text';
     document.getElementById('popup-contact').innerHTML = newMessageData[key].toString();
     key = 'ContactTitle';
     document.getElementById('popup-subject').innerHTML = newMessageData[key].toString();
