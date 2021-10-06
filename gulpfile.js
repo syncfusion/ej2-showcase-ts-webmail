@@ -6,14 +6,14 @@ var webpackGulp = require('webpack-stream');
 /**
  * Compile script files
  */
-gulp.task('scripts', function (done) {
+gulp.task('scripts', function(done) {
     var ts = require('gulp-typescript');
     var tsProject = ts.createProject('tsconfig.json', { typescript: require('typescript') });
     var tsResult = gulp.src(['./src/**/*.ts', './spec/**/*.ts'], { base: '.' })
         .pipe(ts(tsProject));
     tsResult.js
         .pipe(gulp.dest('./'))
-        .on('end', function () {
+        .on('end', function() {
             done();
         });
 });
@@ -21,7 +21,7 @@ gulp.task('scripts', function (done) {
 /**
  * Compile scss files
  */
-gulp.task('styles', function () {
+gulp.task('styles', function() {
     var sass = require('gulp-sass');
     return gulp.src(['./styles/**/*.scss'], { base: './' })
         .pipe(sass({
@@ -34,7 +34,7 @@ gulp.task('styles', function () {
 /**
  * Bundle all module using webpack
  */
-gulp.task('bundle', function () {
+gulp.task('bundle', function() {
     var webpackConfig = require(fs.realpathSync('./webpack.config.js'));
     return gulp.src('')
         .pipe(webpackGulp(webpackConfig, webpack))
@@ -44,7 +44,7 @@ gulp.task('bundle', function () {
 /**
  * Build ts and scss files
  */
-gulp.task('build', function (done) {
+gulp.task('build', function(done) {
     var runSequence = require('run-sequence');
     runSequence('scripts', 'styles', 'bundle', done);
 });
@@ -52,14 +52,14 @@ gulp.task('build', function (done) {
 /**
  * Run test for samplebrowser
  */
-gulp.task('test', function (done) {
+gulp.task('test', function(done) {
     var karma = require('karma');
     new karma.Server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true,
         browsers: ['ChromeHeadless'],
         browserNoActivityTimeout: 30000
-    }, function (e) {
+    }, function(e) {
         done(e === 0 ? null : 'karma exited with status ' + e);
     }).start();
 });
