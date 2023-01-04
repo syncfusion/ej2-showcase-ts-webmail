@@ -180,7 +180,7 @@ function clearMailForm(): void {
         autoToList.value = [] as string[];
     }
     (document.getElementById('txtSubject') as HTMLInputElement).value = '';
-    document.getElementById('mailContentMessage').innerHTML = '';
+    document.getElementById('mentionElement').innerHTML = '';
 }
 
 export function showMailDialog(option: string, selectedMessage: { [key: string]: Object }): void {
@@ -206,9 +206,9 @@ export function showMailDialog(option: string, selectedMessage: { [key: string]:
                 (document.getElementById('txtSubject') as HTMLInputElement).value = selectedMessage[key].toString();
                 key = 'Message';
                 if (selectedMessage[key]) {
-                    document.getElementById('mailContentMessage').innerHTML = selectedMessage[key].toString();
+                    document.getElementById('mentionElement').innerHTML = selectedMessage[key].toString();
                 } else {
-                    document.getElementById('mailContentMessage').innerHTML =
+                    document.getElementById('mentionElement').innerHTML =
                         decodeURI('%3Cdiv%20id=%22box%22%20style=%22padding:10px;%20border:%20none;%20height:%20auto;' +
                             '%22%20contenteditable=%22true%22%20data-gramm_id=%223898c552-c710-10db-69ec-08371185eb3f%22%20' +
                             'data-gramm=%22true%22%20spellcheck=%22false%22%20data-gramm_editor=%22true%22%3E%3Cp%20class=%22' +
