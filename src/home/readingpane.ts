@@ -265,10 +265,10 @@ export function resetRPSelectedItem(text: string): void {
 
 function clearMailForm(): void {
     if (autoCCList.value) {
-        autoCCList.value = [] as [string];
+        autoCCList.value = [] as string[];
     }
     if (autoToList.value) {
-        autoToList.value = [] as [string];
+        autoToList.value = [] as string[];
     }
     (document.getElementById('rp-txtSubject') as HTMLInputElement).value = '';
     document.getElementById('rp-mailContentMessage').innerHTML = '';

@@ -28,24 +28,6 @@ html, body {
 }
 
 /* Top Header Customization */
-
-.header {
-    position: relative;
-    display: block;
-    z-index: 11;
-    background: #222;
-}
-
-    .header.navbar {
-        border-width: 0;
-        border-radius: 0;
-        margin-bottom: 0;
-    }
-
-    .header.navbar.head-pane-hide .header-right-pane {
-        display: none;
-    }
-
     .header-right-pane {
         display: table-cell; 
         text-align: right; 
@@ -101,10 +83,6 @@ html, body {
     z-index: 10006;
 }
 
-.row.content.sidebar-hide .sidebar {
-    left: -280px;
-}
-
 .sidebar {
     position: absolute;
     top: 50px;
@@ -117,10 +95,9 @@ html, body {
 
 .content-wrapper {
     margin: 0;
-    left: 280px;
     height: 100%;
     position:absolute;
-    width:calc(100% - 280px);
+    width:100%;
 }
     .content-wrapper > .content {
         z-index: 7;
@@ -149,12 +126,15 @@ html, body {
 }
 
 .reading-pane {
-    width:calc(100% - 374px);
+    width:100%;
     background-color:#fff;
     height:calc(100% - 40px);
-    left:374px; 
     position:absolute;
     overflow: auto;
+}
+
+#list-pane-div {
+    width: 100%;
 }
 
 .reading-pane.new-mail {
@@ -469,7 +449,7 @@ html, body {
 }
 
 #new_email_toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
-#rp-new_email_toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child, {
+#rp-new_email_toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child{
     margin-left: 0px;
 }
 
@@ -708,6 +688,12 @@ html, body {
 .search-div.search-focus #txtSearch, 
 .search-div.search-focus .e-btn {
     background-color: #FFF;
+}
+.tb-item-search-option .search-div1.search-focus .e-clear-icon{
+    background-color: #F4F9FD;
+}
+.tb-item-search-option:hover .search-div1.search-focus .e-clear-icon{
+    background-color: #DCECF9;
 }
 
 .treeCount {
@@ -1062,8 +1048,8 @@ html, body {
 
 .mail-text-edit-tb-parent {
     height: 40px;
-    margin-bottom: 5px;
-    margin-top: -43px;
+    margin-bottom: 15px;
+    margin-top: -55px;
     width: calc(100% - 30px);
     margin-left: 15px;
 }
@@ -1173,7 +1159,7 @@ html, body {
     top: 0px; bottom: 0px;
     background-color: rgb(51,51,51);
     opacity: 0.4;
-    z-index: 10005;
+    z-index: 999;
     display: none;
 }
 
@@ -1413,7 +1399,7 @@ html, body {
 
 @media screen and (min-width:1200px) {
     .row.content.show-header-content .content-wrapper {
-        width:calc(100% - 610px);
+        width:calc(100% - 330px);
     }
 }
 
@@ -1422,8 +1408,7 @@ html, body {
         width:474px;
     }
     .reading-pane {
-        width:calc(100% - 474px);
-        left:474px; 
+        width:100%;
     }
 }
 
@@ -1431,9 +1416,11 @@ html, body {
     #toolbar_align {
         display: block;
     }
+    
     #toolbar_mobile {
         display: none;
     }
+
     .filter-section {
         display: block;
     }
@@ -1450,19 +1437,25 @@ html, body {
 }
 
 @media screen and (max-width:1090px) {
+    
     #toolbar_align {
         display: none;
     }
     #toolbar_mobile {
         display: block;
     }
-    .header.navbar {
+    #appbar
+    {
+        animation: hideAppBar 0.5s ease-out;
+        height: 0px;
+    }
+    .header.navbar{
         display: none;
     }
     .outlook-container {
         height: 100%;
     }
-    .sidebar {
+    .sidebar {   
         top: 0px;
     }
     .filter-section {
@@ -1502,6 +1495,15 @@ html, body {
         background-color: #fff;
     }
     
+}
+@keyframes hideAppBar
+{
+    from{
+        height: 48px;
+    }
+    to{
+        height: 0px;
+    }
 }
 
 @media screen and (max-width:605px) {
@@ -1684,4 +1686,29 @@ html, body {
 }
 #rp-to {
     font-size: 12px;
+}
+#appbar
+{
+    padding: 0px;
+}
+.header-right-pane
+{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.e-splitter .e-split-bar.e-split-bar-horizontal, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active{
+  background-color:transparent !important;
+
+}
+.e-splitter .e-split-bar.e-split-bar-horizontal .e-resize-handler, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover .e-resize-handler,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active .e-resize-handler{
+  display: none !important;
+}
+#profile-div
+{
+    display: flex;
+    flex-direction: row;
 }
