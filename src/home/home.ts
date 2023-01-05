@@ -1106,7 +1106,6 @@ function showNewMailPopup(option: string): void {
     document.getElementById('toolbar_align').style.display = 'none';
     let toolbarDiv = document.createElement('div');
     toolbarDiv.id = 'toolbar-left-head';
-    toolbarDiv.style.height = '40px';
     document.getElementById('splitter-left-pane').insertBefore(toolbarDiv, document.getElementById('list-pane-div'));
     showMailDialog(option, selectedMessage);
 }
@@ -1158,7 +1157,7 @@ function onWindowResize(evt: Event): void {
             splitObj = new Splitter({
 
                 paneSettings: [
-                    { size: '38%', min: '34%',content:'#list-pane-div'},
+                    { size: '38%', min: '37%',content:'#list-pane-div'},
                     { size: '62%',min:'40%',content:'#reading-pane-div' }
 
                 ],

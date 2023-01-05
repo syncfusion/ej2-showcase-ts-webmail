@@ -1420,6 +1420,12 @@ html, body {
     #toolbar_mobile {
         display: none;
     }
+    #toolbar-left-head
+    {
+        height: 40px;
+        display: block !important;
+        background: #F4F9FD !important;
+    }
 
     .filter-section {
         display: block;
@@ -1443,6 +1449,10 @@ html, body {
     }
     #toolbar_mobile {
         display: block;
+    }
+    #toolbar-left-head
+    {
+        display: none !important;
     }
     #appbar
     {
