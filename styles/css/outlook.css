@@ -121,7 +121,6 @@ html, body {
     background-color:#fff;
     height:calc(100% - 40px);
     left: 0px;
-    position: absolute;
     border-right: 1px solid #e5e3e3;
 }
 
@@ -129,7 +128,6 @@ html, body {
     width:100%;
     background-color:#fff;
     height:calc(100% - 40px);
-    position:absolute;
     overflow: auto;
 }
 
@@ -689,12 +687,6 @@ html, body {
 .search-div.search-focus .e-btn {
     background-color: #FFF;
 }
-.tb-item-search-option .search-div1.search-focus .e-clear-icon{
-    background-color: #F4F9FD;
-}
-.tb-item-search-option:hover .search-div1.search-focus .e-clear-icon{
-    background-color: #DCECF9;
-}
 
 .treeCount {
     color: #0078D7;
@@ -1048,8 +1040,8 @@ html, body {
 
 .mail-text-edit-tb-parent {
     height: 40px;
-    margin-bottom: 15px;
-    margin-top: -55px;
+    margin-bottom: 5px;
+    margin-top: -43px;
     width: calc(100% - 30px);
     margin-left: 15px;
 }
@@ -1416,17 +1408,9 @@ html, body {
     #toolbar_align {
         display: block;
     }
-    
     #toolbar_mobile {
         display: none;
     }
-    #toolbar-left-head
-    {
-        height: 40px;
-        display: block !important;
-        background: #F4F9FD !important;
-    }
-
     .filter-section {
         display: block;
     }
@@ -1443,29 +1427,21 @@ html, body {
 }
 
 @media screen and (max-width:1090px) {
-    
     #toolbar_align {
         display: none;
     }
     #toolbar_mobile {
         display: block;
     }
-    #toolbar-left-head
-    {
-        display: none !important;
-    }
-    #appbar
-    {
+    /* Animation to hide appbar  */
+    #appbar {
         animation: hideAppBar 0.5s ease-out;
         height: 0px;
-    }
-    .header.navbar{
-        display: none;
     }
     .outlook-container {
         height: 100%;
     }
-    .sidebar {   
+    .sidebar {
         top: 0px;
     }
     .filter-section {
@@ -1504,14 +1480,13 @@ html, body {
     .folder-pane.customScrollBar::-webkit-scrollbar-track {
         background-color: #fff;
     }
-    
 }
-@keyframes hideAppBar
-{
-    from{
+
+@keyframes hideAppBar {
+    from {
         height: 48px;
     }
-    to{
+    to {
         height: 0px;
     }
 }
@@ -1697,28 +1672,35 @@ html, body {
 #rp-to {
     font-size: 12px;
 }
-#appbar
-{
+
+/* Overriding appbar styles to achieve exact appbar alignment*/
+#appbar {
     padding: 0px;
 }
-.header-right-pane
-{
+.header-right-pane {
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.e-splitter .e-split-bar.e-split-bar-horizontal, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover,
-.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active{
-  background-color:transparent !important;
-
-}
-.e-splitter .e-split-bar.e-split-bar-horizontal .e-resize-handler, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover .e-resize-handler,
-.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active .e-resize-handler{
-  display: none !important;
-}
-#profile-div
-{
+#profile-div {
     display: flex;
-    flex-direction: row;
+}
+/* Overriding splitter styles to make splitBar transparent  */
+.e-splitter .e-split-bar.e-split-bar-horizontal, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active {
+  background-color:transparent;
+}
+/* Overriding splitter styles to remove resize handler Icon  */
+.e-splitter .e-split-bar.e-split-bar-horizontal .e-resize-handler, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover .e-resize-handler, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active .e-resize-handler {
+  display: none ;
+}
+/* Overriding the default positon to achive exact alignment */
+#reading-pane-div {
+    position: relative;
+}
+#list-pane-div {
+    position: relative;
+}
+.pane-spacer {
+    top: 40px;
 }

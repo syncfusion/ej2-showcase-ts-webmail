@@ -19,13 +19,11 @@ export let selectedToolbarItem: string = '';
 window.newmail = (): void => {
     renderToolbar();
     createMailForm();
-
     let mentionObject: Mention = new Mention({
     dataSource: getContacts(),
     fields: { text: 'text' },
     });
-
-    mentionObject.appendTo('#mentionElement');
+    mentionObject.appendTo('#mailContentMessage');
 };
 
 function createMailForm(): void {
@@ -174,13 +172,13 @@ export function resetSelectedToolbarItem(text: string): void {
 
 function clearMailForm(): void {
     if (autoCCList.value) {
-        autoCCList.value = [] as string[];
+        autoCCList.value = [] as [string];
     }
     if (autoToList.value) {
-        autoToList.value = [] as string[];
+        autoToList.value = [] as [string];
     }
     (document.getElementById('txtSubject') as HTMLInputElement).value = '';
-    document.getElementById('mentionElement').innerHTML = '';
+    document.getElementById('mailContentMessage').innerHTML = '';
 }
 
 export function showMailDialog(option: string, selectedMessage: { [key: string]: Object }): void {
@@ -206,9 +204,9 @@ export function showMailDialog(option: string, selectedMessage: { [key: string]:
                 (document.getElementById('txtSubject') as HTMLInputElement).value = selectedMessage[key].toString();
                 key = 'Message';
                 if (selectedMessage[key]) {
-                    document.getElementById('mentionElement').innerHTML = selectedMessage[key].toString();
+                    document.getElementById('mailContentMessage').innerHTML = selectedMessage[key].toString();
                 } else {
-                    document.getElementById('mentionElement').innerHTML =
+                    document.getElementById('mailContentMessage').innerHTML =
                         decodeURI('%3Cdiv%20id=%22box%22%20style=%22padding:10px;%20border:%20none;%20height:%20auto;' +
                             '%22%20contenteditable=%22true%22%20data-gramm_id=%223898c552-c710-10db-69ec-08371185eb3f%22%20' +
                             'data-gramm=%22true%22%20spellcheck=%22false%22%20data-gramm_editor=%22true%22%3E%3Cp%20class=%22' +

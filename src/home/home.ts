@@ -1,4 +1,4 @@
-/**
+/**mboboxmbobox
  *  Home page handler
  */
 import { IPages } from '../index';
@@ -14,11 +14,8 @@ import { Ajax } from '@syncfusion/ej2-base';
 import { Splitter } from '@syncfusion/ej2-layouts';
 import { folderData, messageDataSourceNew, getContacts, userName, userMail } from './datasource';
 import { showMailDialog, selectedToolbarItem, resetSelectedToolbarItem } from './newmail';
-import {
-    selectedRPToolbarItem, resetRPSelectedItem, bindReadingPaneData, ddlLastRplyValueRP,
-    dropdownSelectRP, showMailDialogRP
-} from './readingpane';
-
+import { selectedRPToolbarItem, resetRPSelectedItem, bindReadingPaneData, ddlLastRplyValueRP,
+    dropdownSelectRP, showMailDialogRP } from './readingpane';
 
 declare let window: IPages;
 
@@ -40,9 +37,9 @@ let toolbarHeader: Toolbar = new Toolbar();
 let toolbarMobile: Toolbar = new Toolbar();
 let defaultSidebar: Sidebar;
 let splitObj: Splitter;
-// tslint:disable-next-line:no-any
+  // tslint:disable-next-line:no-any
 let treeContextMenu: any = new ContextMenu();
-// tslint:disable-next-line:no-any
+  // tslint:disable-next-line:no-any
 let filterContextMenu: any = new ContextMenu();
 let selectedListElement: HTMLElement = null;
 let acSearchMobile: AutoComplete = new AutoComplete();
@@ -55,6 +52,7 @@ let isMenuClick: boolean = false;
 let isItemClick: boolean = false;
 let lastIndex: number = 31;
 let hoverOnPopup: boolean = false;
+let isNewMailClick: boolean = false;
 window.home = (): void => {
 
     let contentWrapper: HTMLElement = document.getElementsByClassName('content-wrapper')[0] as HTMLElement;
@@ -92,10 +90,8 @@ window.home = (): void => {
         document.getElementById('reading-pane-popup').innerHTML = value.toString();
         window.readingpane();
     });
-
     let appObject: AppBar = new AppBar({
         colorMode: 'Dark'
-
     })
     appObject.appendTo("#appbar");
     defaultSidebar = new Sidebar({
@@ -105,8 +101,6 @@ window.home = (): void => {
         enableGestures:false
     });
     defaultSidebar.appendTo('#sideBar');
-
-
 };
 
 function renderMainSection(): void {
@@ -114,16 +108,16 @@ function renderMainSection(): void {
     treeObj = new TreeView({
         fields: { dataSource: treeDataSource, id: 'ID', text: 'Name', parentID: 'PID', hasChildren: 'HasChild', expanded: 'Expanded' },
         nodeTemplate: '<div class="treeviewdiv">' +
-            '<div style="float:left">' +
-            '<span class="treeName">${Name}</span>' +
-            '</div>' +
-            '<div class="count" style="margin-left: 5px; float:right">' +
-            '<span class="treeCount ${Name}" >${Count}</span>' +
-            '</div>' +
-            '<button title="${FavoriteMessage}" class="treeview-btn-temp">' +
-            '<span class="e-btn-icon ej-icon-${Favorite} ${Name}"></span>' +
-            '</button>' +
-            '</div>',
+        '<div style="float:left">' +
+        '<span class="treeName">${Name}</span>' +
+        '</div>' +
+        '<div class="count" style="margin-left: 5px; float:right">' +
+        '<span class="treeCount ${Name}" >${Count}</span>' +
+        '</div>' +
+        '<button title="${FavoriteMessage}" class="treeview-btn-temp">' +
+        '<span class="e-btn-icon ej-icon-${Favorite} ${Name}"></span>' +
+        '</button>' +
+        '</div>',
         nodeSelected: nodeSelected,
     });
     treeObj.appendTo('#tree');
@@ -215,12 +209,12 @@ function renderReplyAllList(): void {
         dataSource: themeList,
         fields: { text: 'text' },
         valueTemplate: '<div>' +
-            '<div style="float:left;margin-top: 1px;">' +
-            '<span style="font-weight:bold;" class="e-btn-icon ej-icon-Reply-All tb-icons e-icons tb-icon-rply-all">' +
-            '</span>' +
-            '</div>' +
-            '<div class="tb-dropdowns" style="float:left" > Reply All </div>' +
-            '<div>',
+        '<div style="float:left;margin-top: 1px;">' +
+        '<span style="font-weight:bold;" class="e-btn-icon ej-icon-Reply-All tb-icons e-icons tb-icon-rply-all">' +
+        '</span>' +
+        '</div>' +
+        '<div class="tb-dropdowns" style="float:left" > Reply All </div>' +
+        '<div>',
         popupHeight: '150px',
         popupWidth: '150px',
         width: '115px',
@@ -242,11 +236,11 @@ function renderCategoryList(): void {
         fields: { text: 'text' },
         valueTemplate: '<div class="tb-dropdowns"> Categories </div>',
         itemTemplate: '<div class="e-list" style="padding:0px 15px">' +
-            '<div style="width: 20px;float:left;top: 8px;position: absolute;">' +
-            '<div style="width: 10px; height:15px; border-color: ${color}; background-color: ${color};"></div>' +
-            '</div>' +
-            '<div style="width: 170px;float:left;margin-left: 15px;font-size:12px;"><span>${text}</span></div>' +
-            '</div>',
+        '<div style="width: 20px;float:left;top: 8px;position: absolute;">' +
+        '<div style="width: 10px; height:15px; border-color: ${color}; background-color: ${color};"></div>' +
+        '</div>' +
+        '<div style="width: 170px;float:left;margin-left: 15px;font-size:12px;"><span>${text}</span></div>' +
+        '</div>',
         popupHeight: '250px',
         popupWidth: '230px',
         value: 'Blue category',
@@ -262,7 +256,7 @@ function renderMoreList(): void {
     let dropDownListObj: DropDownList = new DropDownList({
         dataSource: themeList,
         fields: { text: 'text' },
-        // tslint:disable:max-line-length
+         // tslint:disable:max-line-length
         valueTemplate: '<div class="tb-dropdowns" style ="font-size: 16px;margin-top: -2px;"><span class="e-btn-icon e-icons ej-icon-More"></span> </div>',
         popupHeight: '150px',
         popupWidth: '150px',
@@ -281,7 +275,7 @@ function renderMoreListMobile(): void {
     let dropDownListObj1: DropDownList = new DropDownList({
         dataSource: themeList,
         fields: { text: 'text' },
-        // tslint:disable:max-line-length
+         // tslint:disable:max-line-length
         valueTemplate: '<div class="tb-dropdowns" style ="font-size: 16px;margin-top: -2px;"><span class="e-btn-icon e-icons ej-icon-More"></span> </div>',
         popupHeight: '150px',
         popupWidth: '150px',
@@ -338,6 +332,7 @@ function renderToolbarMobile(): void {
             { text: 'Inbox', cssClass: 'tb-item-inbox tb-item-front' },
             { text: 'Compose', cssClass: 'tb-item-inbox tb-item-back tb-item-newmail-option' },
             { template: ele, cssClass: 'tb-item-search-option', align: 'Center' },
+            { prefixIcon: 'ej-icon-Close', tooltipText: 'Clear', align: 'Right', cssClass: 'tb-item-search-option' },
             { prefixIcon: 'ej-icon-Search', tooltipText: 'Search Mail', align: 'Right', cssClass: 'tb-item-front' },
             { prefixIcon: 'ej-icon-Create-New', tooltipText: 'Write a new message', align: 'Right', cssClass: 'tb-item-front' },
             { prefixIcon: 'ej-icon-Send', tooltipText: 'Send', align: 'Right', cssClass: 'tb-item-back tb-item-newmail-option' },
@@ -360,7 +355,7 @@ function renderToolbarMobile(): void {
         focus: autoSearchFocus1,
         blur: autoSearchBlur1,
         cssClass: 'search-text-box-device',
-        showClearButton: true
+        showClearButton: false
     });
     acSearchMobile.appendTo('#txtSearch1');
     renderMoreListMobile();
@@ -425,13 +420,11 @@ export function showEmptyMessage(): void {
     readingPane.className = readingPane.className.replace(' new-mail', '');
     (document.getElementsByClassName('tb-item-new-mail')[0] as HTMLElement).style.display = 'inline-flex';
     (document.getElementsByClassName('tb-item-mark-read')[0] as HTMLElement).style.display = 'inline-flex';
-    if (document.getElementById('toolbar-left-head')) { 
-        document.getElementById('splitter-left-pane').removeChild(document.getElementById('toolbar-left-head'));
-        document.getElementById('toolbar_align').style.display = '';
-    }
+    document.getElementById('toolbar_align').style.display = '';
 }
 
 export function showSelectedMessage(): void {
+    isNewMailClick = false;
     document.getElementById('emptyMessageDiv').style.display = 'none';
     document.getElementById('mailarea').style.display = 'none';
     document.getElementById('accordian').style.display = '';
@@ -440,10 +433,8 @@ export function showSelectedMessage(): void {
     readingPane.className = readingPane.className.replace(' new-mail', '');
     (document.getElementsByClassName('tb-item-new-mail')[0] as HTMLElement).style.display = 'inline-flex';
     (document.getElementsByClassName('tb-item-mark-read')[0] as HTMLElement).style.display = 'none';
-    if (document.getElementById('toolbar-left-head')) {
-        document.getElementById('splitter-left-pane').removeChild(document.getElementById('toolbar-left-head'));
-        document.getElementById('toolbar_align').style.display = '';
-    }
+    document.getElementById('toolbar_align').style.display = '';
+    document.getElementById('list-pane-div').classList.remove("pane-spacer");
 }
 
 function getFilteredDataSource(dataSource: { [key: string]: Object }[], columnName: string, columnValue: string)
@@ -529,11 +520,11 @@ function treeMenuSelect(args: MenuEventArgs): void {
         } else if (args.item.text === 'Delete') {
             if (selectedFolderName === 'Deleted Items') {
                 dlgDelete.content = '<div class="dlg-content-style"><span>Are you sure you want to permanently' +
-                    ' delete all the items in Deleted items?</span></div>';
+                ' delete all the items in Deleted items?</span></div>';
                 dlgDelete.header = 'Delete All';
             } else {
                 dlgDelete.content = '<div class="dlg-content-style"><span>Are you sure you want to move all ' +
-                    'its content to Deleted items?</span></div>';
+                'its content to Deleted items?</span></div>';
                 dlgDelete.header = 'Delete Folder Items';
             }
             dlgDelete.show();
@@ -818,13 +809,13 @@ function discardDialog(name: string, isModal: boolean): Dialog {
         width: '335px',
         header: 'Discard message',
         content: '<div id=' + name + 'discardOk' + ' style="cursor:pointer" class="dlg-content-style1">' +
-            '<span style="color:white" class="dlg-discard-text-style">Discard</span> <br/>' +
-            '<span style="color:white; font-weight:normal" class="dlg-discard-child-text-style">This message will be deleted</span>' +
-            '</div> <br/>' +
-            '<div id=' + name + 'discardCancel' + ' style="cursor:pointer" class="dlg-content-style">' +
-            '<span class="dlg-discard-text-style">Don' + "'" + 't Discard</span> <br/>' +
-            '<span style="font-weight:normal" class="dlg-discard-child-text-style">Return to the message for further editing</span>' +
-            '</div>',
+        '<span style="color:white" class="dlg-discard-text-style">Discard</span> <br/>' +
+        '<span style="color:white; font-weight:normal" class="dlg-discard-child-text-style">This message will be deleted</span>' +
+        '</div> <br/>' +
+        '<div id=' + name + 'discardCancel' + ' style="cursor:pointer" class="dlg-content-style">' +
+        '<span class="dlg-discard-text-style">Don' + "'" + 't Discard</span> <br/>' +
+        '<span style="font-weight:normal" class="dlg-discard-child-text-style">Return to the message for further editing</span>' +
+        '</div>',
         target: document.body,
         isModal: isModal,
         closeOnEscape: true,
@@ -1094,6 +1085,7 @@ function toolbarClick(args: ClickEventArgs): void {
 }
 
 function showNewMailPopup(option: string): void {
+    isNewMailClick = true;
     let selectedMessage: { [key: string]: Object } = getSelectedMessage();
     showToolbarItems('none');
     document.getElementById('reading-pane-div').className += ' new-mail';
@@ -1104,13 +1096,12 @@ function showNewMailPopup(option: string): void {
     (document.getElementsByClassName('tb-item-new-mail')[0] as HTMLElement).style.display = 'none';
     (document.getElementsByClassName('tb-item-mark-read')[0] as HTMLElement).style.display = 'none';
     document.getElementById('toolbar_align').style.display = 'none';
-    let toolbarDiv = document.createElement('div');
-    toolbarDiv.id = 'toolbar-left-head';
-    document.getElementById('splitter-left-pane').insertBefore(toolbarDiv, document.getElementById('list-pane-div'));
+    document.getElementById('list-pane-div').classList.add("pane-spacer")
     showMailDialog(option, selectedMessage);
 }
 
 function onWindowResize(evt: Event): void {
+    let messagePane: HTMLElement = document.getElementById('list-pane-div');
     let contentArea: Element = document.getElementsByClassName('row content')[0];
     let isReadingPane: boolean = (contentArea.className.indexOf('show-reading-pane') === -1);
     if (!isReadingPane && window.innerWidth < 605) {
@@ -1122,7 +1113,6 @@ function onWindowResize(evt: Event): void {
             headerRP.className = 'header-right-pane';
         }
         contentArea.className = 'row content';
-
     } else {
         if (contentArea.className.indexOf('show-header-content') === -1) {
             contentArea.className = 'row content';
@@ -1132,9 +1122,20 @@ function onWindowResize(evt: Event): void {
     }
     if (window.innerWidth < 1090) {
         contentArea.className = 'row content sidebar-hide';
+        if (messagePane.classList.contains('pane-spacer')){
+            messagePane.classList.remove("pane-spacer");
+        }
         defaultSidebar.hide();
         defaultSidebar.type='Over';
     } else {
+        if (!isNewMailClick){
+            if (messagePane.classList.contains("pane-spacer")) {
+                messagePane.classList.remove("pane-spacer");
+            }
+        }
+        else {
+            messagePane.classList.add("pane-spacer")
+        }
         defaultSidebar.type='Push';
         defaultSidebar.show();
     }
@@ -1149,19 +1150,17 @@ function onWindowResize(evt: Event): void {
             document.querySelector('.maincontent_pane').appendChild(document.querySelector('#reading-pane-div'));
             (document.querySelector('#list-pane-div') as HTMLElement).style.display='';
             (document.querySelector('#reading-pane-div') as HTMLElement).style.display='';
-
         }
     }
     else{
         if (!splitObj) {
             splitObj = new Splitter({
-
                 paneSettings: [
-                    { size: '38%', min: '37%',content:'#list-pane-div'},
-                    { size: '62%',min:'40%',content:'#reading-pane-div' }
-
+                    { size: '37%', min: '37%',content:'#list-pane-div'},
+                    { size: '63%',min:'40%',content:'#reading-pane-div' }
                 ],
-                width: '100%'
+                width: '100%',
+                height: '100%'
             });
             splitObj.appendTo('#splitter');
         }
@@ -1171,7 +1170,6 @@ function onWindowResize(evt: Event): void {
 
 function hideSideBar(): void {
     if (!isMenuClick) {
-
         if (defaultSidebar && window.innerWidth < 1090) {
             defaultSidebar.hide();
             let overlayElement: Element = document.getElementsByClassName('overlay-element')[0];
@@ -1295,7 +1293,7 @@ function documentClick(evt: MouseEvent): void {
         let target: HTMLElement = evt.target as HTMLElement;
         if (target.className.indexOf('header-right-pane') !== -1) {
             headerContent(evt.target as HTMLElement);
-        } else if (!dropdownSelectRP && dlgReplyAllWindow.visible && target.innerText === ddlLastRplyValueRP) {
+        } else if (!dropdownSelectRP && dlgReplyAllWindow.visible &&  target.innerText === ddlLastRplyValueRP ) {
             showMailDialogRP(ddlLastRplyValueRP);
         } else if (!dropdownSelect && !dlgReplyAllWindow.visible && target.innerText === ddlReplyAll.value) {
             showNewMailPopup(ddlReplyAll.value);
@@ -1468,7 +1466,7 @@ function openPopup(): void {
     document.getElementById('popup-message-content').innerHTML = newMessageData[key].toString();
     key = 'Image';
     document.getElementById('popup-image').style.background = 'url(' +
-        newMessageData[key].toString().replace('styles/images/images/', 'styles/images/large/') + ') no-repeat 50% 50%';
+    newMessageData[key].toString().replace('styles/images/images/', 'styles/images/large/') + ') no-repeat 50% 50%';
     key = 'Folder';
     newMessageData[key] = 'Inbox';
     key = 'ReadStyle';
