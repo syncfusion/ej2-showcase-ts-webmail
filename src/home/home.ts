@@ -396,6 +396,8 @@ export function showToolbarItems(displayType: string): void {
 }
 
 function nodeSelected(args: NodeSelectEventArgs): void {
+    isNewMailClick=false;
+    document.getElementById('list-pane-div').classList.remove("pane-spacer");
     let key: string = 'id';
     treeSelectedElement = args.node;
     treeviewSelectedData = getTreeData1(args.nodeData[key].toString());
@@ -1086,6 +1088,9 @@ function toolbarClick(args: ClickEventArgs): void {
 
 function showNewMailPopup(option: string): void {
     isNewMailClick = true;
+    if (window.innerWidth > 1090) {
+        document.getElementById('list-pane-div').classList.add("pane-spacer");
+    }
     let selectedMessage: { [key: string]: Object } = getSelectedMessage();
     showToolbarItems('none');
     document.getElementById('reading-pane-div').className += ' new-mail';
@@ -1096,7 +1101,6 @@ function showNewMailPopup(option: string): void {
     (document.getElementsByClassName('tb-item-new-mail')[0] as HTMLElement).style.display = 'none';
     (document.getElementsByClassName('tb-item-mark-read')[0] as HTMLElement).style.display = 'none';
     document.getElementById('toolbar_align').style.display = 'none';
-    document.getElementById('list-pane-div').classList.add("pane-spacer")
     showMailDialog(option, selectedMessage);
 }
 
