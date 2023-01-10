@@ -396,8 +396,7 @@ export function showToolbarItems(displayType: string): void {
 }
 
 function nodeSelected(args: NodeSelectEventArgs): void {
-    isNewMailClick=false;
-    document.getElementById('list-pane-div').classList.remove("pane-spacer");
+    removeSpacer();
     let key: string = 'id';
     treeSelectedElement = args.node;
     treeviewSelectedData = getTreeData1(args.nodeData[key].toString());
@@ -414,6 +413,7 @@ function nodeSelected(args: NodeSelectEventArgs): void {
 }
 
 export function showEmptyMessage(): void {
+    removeSpacer();
     document.getElementById('emptyMessageDiv').style.display = '';
     document.getElementById('mailarea').style.display = 'none';
     document.getElementById('accordian').style.display = 'none';
@@ -426,7 +426,7 @@ export function showEmptyMessage(): void {
 }
 
 export function showSelectedMessage(): void {
-    isNewMailClick = false;
+    removeSpacer();
     document.getElementById('emptyMessageDiv').style.display = 'none';
     document.getElementById('mailarea').style.display = 'none';
     document.getElementById('accordian').style.display = '';
@@ -436,7 +436,6 @@ export function showSelectedMessage(): void {
     (document.getElementsByClassName('tb-item-new-mail')[0] as HTMLElement).style.display = 'inline-flex';
     (document.getElementsByClassName('tb-item-mark-read')[0] as HTMLElement).style.display = 'none';
     document.getElementById('toolbar_align').style.display = '';
-    document.getElementById('list-pane-div').classList.remove("pane-spacer");
 }
 
 function getFilteredDataSource(dataSource: { [key: string]: Object }[], columnName: string, columnValue: string)
@@ -1504,3 +1503,7 @@ function openPopup(): void {
 }
 
 setTimeout(openPopup, 3000);
+function removeSpacer() {
+    isNewMailClick=false;
+    document.getElementById('list-pane-div').classList.remove("pane-spacer");
+}
