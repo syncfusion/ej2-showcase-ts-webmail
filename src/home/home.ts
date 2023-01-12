@@ -1,4 +1,4 @@
-/**mboboxmbobox
+/**
  *  Home page handler
  */
 import { IPages } from '../index';
@@ -58,9 +58,6 @@ window.home = (): void => {
     let contentWrapper: HTMLElement = document.getElementsByClassName('content-wrapper')[0] as HTMLElement;
     contentWrapper.onclick = hideSideBar;
 
-    let overlayElement: HTMLElement = document.getElementsByClassName('overlay-element')[0] as HTMLElement;
-    overlayElement.onclick = hideSideBar;
-
     window.onresize = onWindowResize;
     window.onload = onWindowResize;
     document.onclick = documentClick;
@@ -98,7 +95,8 @@ window.home = (): void => {
         width: "280px",
         type: "Push",
         enablePersistence: true,
-        enableGestures:false
+        enableGestures:false,
+        showBackdrop:false
     });
     defaultSidebar.appendTo('#sideBar');
 };
@@ -396,7 +394,7 @@ export function showToolbarItems(displayType: string): void {
 }
 
 function nodeSelected(args: NodeSelectEventArgs): void {
-    removeSpacer();
+    updateNewMailClick();
     let key: string = 'id';
     treeSelectedElement = args.node;
     treeviewSelectedData = getTreeData1(args.nodeData[key].toString());
@@ -413,7 +411,7 @@ function nodeSelected(args: NodeSelectEventArgs): void {
 }
 
 export function showEmptyMessage(): void {
-    removeSpacer();
+    updateNewMailClick();
     document.getElementById('emptyMessageDiv').style.display = '';
     document.getElementById('mailarea').style.display = 'none';
     document.getElementById('accordian').style.display = 'none';
@@ -426,7 +424,7 @@ export function showEmptyMessage(): void {
 }
 
 export function showSelectedMessage(): void {
-    removeSpacer();
+    updateNewMailClick();
     document.getElementById('emptyMessageDiv').style.display = 'none';
     document.getElementById('mailarea').style.display = 'none';
     document.getElementById('accordian').style.display = '';
@@ -1025,8 +1023,6 @@ function toolbarClick(args: ClickEventArgs): void {
     if (args.item) {
         if (args.item.prefixIcon === 'ej-icon-Menu tb-icons') {
             defaultSidebar.show();
-            let overlayElement: Element = document.getElementsByClassName('overlay-element')[0];
-            overlayElement.className = 'overlay-element show1';
             isMenuClick = true;
         } else if (args.item.prefixIcon === 'ej-icon-Back') {
             let contentElement: Element = document.getElementsByClassName('row content')[0];
@@ -1088,7 +1084,7 @@ function toolbarClick(args: ClickEventArgs): void {
 function showNewMailPopup(option: string): void {
     isNewMailClick = true;
     if (window.innerWidth > 1090) {
-        document.getElementById('list-pane-div').classList.add("pane-spacer");
+        document.getElementById('list-pane-div').classList.add("msg-top-margin");
     }
     let selectedMessage: { [key: string]: Object } = getSelectedMessage();
     showToolbarItems('none');
@@ -1125,21 +1121,14 @@ function onWindowResize(evt: Event): void {
     }
     if (window.innerWidth < 1090) {
         contentArea.className = 'row content sidebar-hide';
-        if (messagePane.classList.contains('pane-spacer')){
-            messagePane.classList.remove("pane-spacer");
-        }
+        messagePane.classList.remove("msg-top-margin");
         defaultSidebar.hide();
         defaultSidebar.type='Over';
+        defaultSidebar.showBackdrop=true;
     } else {
-        if (!isNewMailClick){
-            if (messagePane.classList.contains("pane-spacer")) {
-                messagePane.classList.remove("pane-spacer");
-            }
-        }
-        else {
-            messagePane.classList.add("pane-spacer")
-        }
+        messagePane.classList[ isNewMailClick ? 'add' : 'remove' ]('msg-top-margin');
         defaultSidebar.type='Push';
+        defaultSidebar.showBackdrop =false;
         defaultSidebar.show();
     }
     if (window.innerWidth < 605) {
@@ -1175,8 +1164,6 @@ function hideSideBar(): void {
     if (!isMenuClick) {
         if (defaultSidebar && window.innerWidth < 1090) {
             defaultSidebar.hide();
-            let overlayElement: Element = document.getElementsByClassName('overlay-element')[0];
-            overlayElement.className = 'overlay-element';
         }
     }
     isMenuClick = false;
@@ -1503,7 +1490,7 @@ function openPopup(): void {
 }
 
 setTimeout(openPopup, 3000);
-function removeSpacer() {
+function updateNewMailClick() {
     isNewMailClick=false;
-    document.getElementById('list-pane-div').classList.remove("pane-spacer");
+    document.getElementById('list-pane-div').classList.remove("msg-top-margin");
 }

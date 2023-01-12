@@ -1143,22 +1143,6 @@ html, body {
     z-index: 100001;
 }
 
-.overlay-element {
-    width: 100%;
-    height: calc(100% + 50px);
-    position: absolute;
-    left: 0px; right: 0px;
-    top: 0px; bottom: 0px;
-    background-color: rgb(51,51,51);
-    opacity: 0.4;
-    z-index: 999;
-    display: none;
-}
-
-.overlay-element.show1 {
-    display: block;
-}
-
 .popup-subjectstyle {
     width:250px;
 }
@@ -1701,6 +1685,6 @@ html, body {
 #list-pane-div {
     position: relative;
 }
-.pane-spacer {
+.msg-top-margin {
     top: 40px;
 }
