@@ -64,10 +64,6 @@ html, body {
     height: 100%;
 }
 
-.row.content.show-header-content .headerContent {
-    display: inline;
-}
-
 .row.content.sidebar-hide .content-wrapper {
     left: 0px;
     width: 100%;
@@ -828,11 +824,6 @@ html, body {
 
 /* Defining Header Content */
 
-.headerContent .text-content {
-    font-size: 28px;
-    font-family: "Segoe UI Light","Segoe UI",Segoe,Tahoma,Helvetica,Arial,Sans-Serif;
-}
-
 #btnCloseButton {
     box-shadow: 0 0;
     background: transparent;
@@ -1358,10 +1349,6 @@ html, body {
         display: table-cell;
     }
     
-    .headerContent {
-        right: 0px;
-        position: absolute;
-    }
 }
 
 @media screen and (min-width:1200px) {
