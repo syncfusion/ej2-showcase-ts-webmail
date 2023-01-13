@@ -172,10 +172,10 @@ export function resetSelectedToolbarItem(text: string): void {
 
 function clearMailForm(): void {
     if (autoCCList.value) {
-        autoCCList.value = [] as [string];
+        autoCCList.value = [] as string[];
     }
     if (autoToList.value) {
-        autoToList.value = [] as [string];
+        autoToList.value = [] as string[];
     }
     (document.getElementById('txtSubject') as HTMLInputElement).value = '';
     document.getElementById('mailContentMessage').innerHTML = '';

@@ -36,6 +36,7 @@ let treeObj: TreeView = new TreeView();
 let toolbarHeader: Toolbar = new Toolbar();
 let toolbarMobile: Toolbar = new Toolbar();
 let defaultSidebar: Sidebar;
+let sidebarHeader: Sidebar;
 let splitObj: Splitter;
   // tslint:disable-next-line:no-any
 let treeContextMenu: any = new ContextMenu();
@@ -94,11 +95,20 @@ window.home = (): void => {
     defaultSidebar = new Sidebar({
         width: "280px",
         type: "Push",
+        target:".content-wrapper",
         enablePersistence: true,
         enableGestures:false,
         showBackdrop:false
     });
     defaultSidebar.appendTo('#sideBar');
+    sidebarHeader = new Sidebar({
+        position:"Right",
+        width: "330px",
+        type:"Push",
+        target:".content-wrapper",
+        enableGestures:false,
+    });
+    sidebarHeader.appendTo('#headerSidebar');
 };
 
 function renderMainSection(): void {
@@ -936,6 +946,7 @@ function btnCloseClick(): void {
     contentWrapper.className = contentWrapper.className.replace(' show-header-content', '');
     let headerRP: Element = document.getElementsByClassName('header-right-pane selected')[0];
     headerRP.className = 'header-right-pane';
+    sidebarHeader.hide();
 }
 
 function sortList(listItems: { [key: string]: Object }[]): { [key: string]: Object }[] {
@@ -1112,12 +1123,14 @@ function onWindowResize(evt: Event): void {
             headerRP.className = 'header-right-pane';
         }
         contentArea.className = 'row content';
+        sidebarHeader.type="Over";
     } else {
         if (contentArea.className.indexOf('show-header-content') === -1) {
             contentArea.className = 'row content';
         } else {
             contentArea.className = 'row content show-header-content';
         }
+        sidebarHeader.type="Push";
     }
     if (window.innerWidth < 1090) {
         contentArea.className = 'row content sidebar-hide';
@@ -1283,6 +1296,7 @@ function documentClick(evt: MouseEvent): void {
         let target: HTMLElement = evt.target as HTMLElement;
         if (target.className.indexOf('header-right-pane') !== -1) {
             headerContent(evt.target as HTMLElement);
+            sidebarHeader.show();
         } else if (!dropdownSelectRP && dlgReplyAllWindow.visible &&  target.innerText === ddlLastRplyValueRP ) {
             showMailDialogRP(ddlLastRplyValueRP);
         } else if (!dropdownSelect && !dlgReplyAllWindow.visible && target.innerText === ddlReplyAll.value) {

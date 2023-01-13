@@ -53,11 +53,6 @@ html, body {
         color: black;
     }
 
-.headerContent {
-    display: none;
-    z-index: 10;
-}
-
 /* Main Content Customization */
 
 .row {
@@ -98,6 +93,7 @@ html, body {
     height: 100%;
     position:absolute;
     width:100%;
+    overflow: hidden;
 }
     .content-wrapper > .content {
         z-index: 7;
@@ -959,11 +955,6 @@ html, body {
     height: 100%;
 }
 
-.e-dlg-overlay {
-    background-color: white;
-    opacity: 0.65;
-}
-
 .dlg-content-style {
     padding: 15px;
     background-color: #f4f4f4;
@@ -1375,7 +1366,7 @@ html, body {
 
 @media screen and (min-width:1200px) {
     .row.content.show-header-content .content-wrapper {
-        width:calc(100% - 330px);
+        width:100%;
     }
 }
 
@@ -1687,4 +1678,12 @@ html, body {
 }
 .msg-top-margin {
     top: 40px;
+}
+/* Styles for the of Right-SideBar Content */
+#headerSidebar {
+    background-color: #f4f4f4;
+}
+#headerSidebar .text-content {
+    font-size: 28px;
+    font-family: "Segoe UI Light","Segoe UI",Segoe,Tahoma,Helvetica,Arial,Sans-Serif;
 }
