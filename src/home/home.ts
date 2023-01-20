@@ -3,7 +3,7 @@
  */
 import { IPages } from '../index';
 import {
-    TreeView, Toolbar, Accordion, ContextMenu, MenuItemModel, ContextMenuModel, ClickEventArgs,
+    Sidebar, AppBar, TreeView, Toolbar, Accordion, ContextMenu, MenuItemModel, ContextMenuModel, ClickEventArgs,
     NodeSelectEventArgs, MenuEventArgs, BeforeOpenCloseMenuEventArgs
 } from '@syncfusion/ej2-navigations';
 import { ListView, SelectEventArgs, SortOrder } from '@syncfusion/ej2-lists';
@@ -11,6 +11,7 @@ import { Button } from '@syncfusion/ej2-buttons';
 import { AutoComplete, DropDownList, ChangeEventArgs, SelectEventArgs as DropDownSelectEventArgs } from '@syncfusion/ej2-dropdowns';
 import { Dialog, Popup } from '@syncfusion/ej2-popups';
 import { Ajax } from '@syncfusion/ej2-base';
+import { Splitter } from '@syncfusion/ej2-layouts';
 import { folderData, messageDataSourceNew, getContacts, userName, userMail } from './datasource';
 import { showMailDialog, selectedToolbarItem, resetSelectedToolbarItem } from './newmail';
 import { selectedRPToolbarItem, resetRPSelectedItem, bindReadingPaneData, ddlLastRplyValueRP,
@@ -34,6 +35,9 @@ let acrdnObj: Accordion = new Accordion();
 let treeObj: TreeView = new TreeView();
 let toolbarHeader: Toolbar = new Toolbar();
 let toolbarMobile: Toolbar = new Toolbar();
+let defaultSidebar: Sidebar;
+let sidebarHeader: Sidebar;
+let splitObj: Splitter;
   // tslint:disable-next-line:no-any
 let treeContextMenu: any = new ContextMenu();
   // tslint:disable-next-line:no-any
@@ -49,13 +53,11 @@ let isMenuClick: boolean = false;
 let isItemClick: boolean = false;
 let lastIndex: number = 31;
 let hoverOnPopup: boolean = false;
+let isNewMailClick: boolean = false;
 window.home = (): void => {
 
     let contentWrapper: HTMLElement = document.getElementsByClassName('content-wrapper')[0] as HTMLElement;
     contentWrapper.onclick = hideSideBar;
-
-    let overlayElement: HTMLElement = document.getElementsByClassName('overlay-element')[0] as HTMLElement;
-    overlayElement.onclick = hideSideBar;
 
     window.onresize = onWindowResize;
     window.onload = onWindowResize;
@@ -86,6 +88,27 @@ window.home = (): void => {
         document.getElementById('reading-pane-popup').innerHTML = value.toString();
         window.readingpane();
     });
+    let appObject: AppBar = new AppBar({
+        colorMode: 'Dark'
+    })
+    appObject.appendTo("#appbar");
+    defaultSidebar = new Sidebar({
+        width: "280px",
+        type: "Push",
+        target:".content-wrapper",
+        enablePersistence: true,
+        enableGestures:false,
+        showBackdrop:false
+    });
+    defaultSidebar.appendTo('#sideBar');
+    sidebarHeader = new Sidebar({
+        position:"Right",
+        width: "330px",
+        type:"Push",
+        target:".content-wrapper",
+        enableGestures:false,
+    });
+    sidebarHeader.appendTo('#headerSidebar');
 };
 
 function renderMainSection(): void {
@@ -381,6 +404,7 @@ export function showToolbarItems(displayType: string): void {
 }
 
 function nodeSelected(args: NodeSelectEventArgs): void {
+    updateNewMailClick();
     let key: string = 'id';
     treeSelectedElement = args.node;
     treeviewSelectedData = getTreeData1(args.nodeData[key].toString());
@@ -397,6 +421,7 @@ function nodeSelected(args: NodeSelectEventArgs): void {
 }
 
 export function showEmptyMessage(): void {
+    updateNewMailClick();
     document.getElementById('emptyMessageDiv').style.display = '';
     document.getElementById('mailarea').style.display = 'none';
     document.getElementById('accordian').style.display = 'none';
@@ -405,9 +430,11 @@ export function showEmptyMessage(): void {
     readingPane.className = readingPane.className.replace(' new-mail', '');
     (document.getElementsByClassName('tb-item-new-mail')[0] as HTMLElement).style.display = 'inline-flex';
     (document.getElementsByClassName('tb-item-mark-read')[0] as HTMLElement).style.display = 'inline-flex';
+    document.getElementById('toolbar_align').style.display = '';
 }
 
 export function showSelectedMessage(): void {
+    updateNewMailClick();
     document.getElementById('emptyMessageDiv').style.display = 'none';
     document.getElementById('mailarea').style.display = 'none';
     document.getElementById('accordian').style.display = '';
@@ -416,6 +443,7 @@ export function showSelectedMessage(): void {
     readingPane.className = readingPane.className.replace(' new-mail', '');
     (document.getElementsByClassName('tb-item-new-mail')[0] as HTMLElement).style.display = 'inline-flex';
     (document.getElementsByClassName('tb-item-mark-read')[0] as HTMLElement).style.display = 'none';
+    document.getElementById('toolbar_align').style.display = '';
 }
 
 function getFilteredDataSource(dataSource: { [key: string]: Object }[], columnName: string, columnValue: string)
@@ -918,6 +946,7 @@ function btnCloseClick(): void {
     contentWrapper.className = contentWrapper.className.replace(' show-header-content', '');
     let headerRP: Element = document.getElementsByClassName('header-right-pane selected')[0];
     headerRP.className = 'header-right-pane';
+    sidebarHeader.hide();
 }
 
 function sortList(listItems: { [key: string]: Object }[]): { [key: string]: Object }[] {
@@ -1004,10 +1033,7 @@ function headerContent(headerElement: HTMLElement): void {
 function toolbarClick(args: ClickEventArgs): void {
     if (args.item) {
         if (args.item.prefixIcon === 'ej-icon-Menu tb-icons') {
-            let sidebarElement: Element = document.getElementsByClassName('sidebar')[0];
-            sidebarElement.className = 'sidebar show';
-            let overlayElement: Element = document.getElementsByClassName('overlay-element')[0];
-            overlayElement.className = 'overlay-element show1';
+            defaultSidebar.show();
             isMenuClick = true;
         } else if (args.item.prefixIcon === 'ej-icon-Back') {
             let contentElement: Element = document.getElementsByClassName('row content')[0];
@@ -1067,6 +1093,10 @@ function toolbarClick(args: ClickEventArgs): void {
 }
 
 function showNewMailPopup(option: string): void {
+    isNewMailClick = true;
+    if (window.innerWidth > 1090) {
+        document.getElementById('list-pane-div').classList.add("msg-top-margin");
+    }
     let selectedMessage: { [key: string]: Object } = getSelectedMessage();
     showToolbarItems('none');
     document.getElementById('reading-pane-div').className += ' new-mail';
@@ -1076,39 +1106,68 @@ function showNewMailPopup(option: string): void {
     document.getElementById('mailarea').appendChild(document.getElementById('newmailContent'));
     (document.getElementsByClassName('tb-item-new-mail')[0] as HTMLElement).style.display = 'none';
     (document.getElementsByClassName('tb-item-mark-read')[0] as HTMLElement).style.display = 'none';
+    document.getElementById('toolbar_align').style.display = 'none';
     showMailDialog(option, selectedMessage);
 }
 
 function onWindowResize(evt: Event): void {
-    let headerNode: Element = document.getElementsByClassName('header navbar')[0];
+    let messagePane: HTMLElement = document.getElementById('list-pane-div');
     let contentArea: Element = document.getElementsByClassName('row content')[0];
     let isReadingPane: boolean = (contentArea.className.indexOf('show-reading-pane') === -1);
     if (!isReadingPane && window.innerWidth < 605) {
         return;
     }
     if (window.innerWidth < 1200) {
-        headerNode.className = 'header navbar head-pane-hide';
         let headerRP: Element = document.getElementsByClassName('header-right-pane selected')[0];
         if (headerRP) {
             headerRP.className = 'header-right-pane';
         }
         contentArea.className = 'row content';
+        sidebarHeader.type="Over";
     } else {
-        headerNode.className = 'header navbar';
         if (contentArea.className.indexOf('show-header-content') === -1) {
             contentArea.className = 'row content';
         } else {
             contentArea.className = 'row content show-header-content';
         }
+        sidebarHeader.type="Push";
     }
     if (window.innerWidth < 1090) {
         contentArea.className = 'row content sidebar-hide';
+        messagePane.classList.remove("msg-top-margin");
+        defaultSidebar.hide();
+        defaultSidebar.type='Over';
+        defaultSidebar.showBackdrop=true;
     } else {
-        hideSideBar();
+        messagePane.classList[ isNewMailClick ? 'add' : 'remove' ]('msg-top-margin');
+        defaultSidebar.type='Push';
+        defaultSidebar.showBackdrop =false;
+        defaultSidebar.show();
     }
     if (window.innerWidth < 605) {
         if (isReadingPane) {
             contentArea.className = contentArea.className + ' ' + 'show-message-pane';
+        }
+        if(splitObj){
+            splitObj.destroy();
+            splitObj=null;
+            document.querySelector('.maincontent_pane').appendChild(document.querySelector('#list-pane-div'));
+            document.querySelector('.maincontent_pane').appendChild(document.querySelector('#reading-pane-div'));
+            (document.querySelector('#list-pane-div') as HTMLElement).style.display='';
+            (document.querySelector('#reading-pane-div') as HTMLElement).style.display='';
+        }
+    }
+    else{
+        if (!splitObj) {
+            splitObj = new Splitter({
+                paneSettings: [
+                    { size: '37%', min: '37%',content:'#list-pane-div'},
+                    { size: '63%',min:'40%',content:'#reading-pane-div' }
+                ],
+                width: '100%',
+                height: '100%'
+            });
+            splitObj.appendTo('#splitter');
         }
     }
     toolbarMobile.refreshOverflow();
@@ -1116,11 +1175,8 @@ function onWindowResize(evt: Event): void {
 
 function hideSideBar(): void {
     if (!isMenuClick) {
-        let sidebar: Element = document.getElementsByClassName('sidebar')[0];
-        if (sidebar.className.indexOf('sidebar show') !== -1) {
-            sidebar.className = 'sidebar';
-            let overlayElement: Element = document.getElementsByClassName('overlay-element')[0];
-            overlayElement.className = 'overlay-element';
+        if (defaultSidebar && window.innerWidth < 1090) {
+            defaultSidebar.hide();
         }
     }
     isMenuClick = false;
@@ -1240,6 +1296,7 @@ function documentClick(evt: MouseEvent): void {
         let target: HTMLElement = evt.target as HTMLElement;
         if (target.className.indexOf('header-right-pane') !== -1) {
             headerContent(evt.target as HTMLElement);
+            sidebarHeader.show();
         } else if (!dropdownSelectRP && dlgReplyAllWindow.visible &&  target.innerText === ddlLastRplyValueRP ) {
             showMailDialogRP(ddlLastRplyValueRP);
         } else if (!dropdownSelect && !dlgReplyAllWindow.visible && target.innerText === ddlReplyAll.value) {
@@ -1447,3 +1504,7 @@ function openPopup(): void {
 }
 
 setTimeout(openPopup, 3000);
+function updateNewMailClick() {
+    isNewMailClick=false;
+    document.getElementById('list-pane-div').classList.remove("msg-top-margin");
+}

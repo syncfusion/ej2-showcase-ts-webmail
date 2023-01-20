@@ -28,24 +28,6 @@ html, body {
 }
 
 /* Top Header Customization */
-
-.header {
-    position: relative;
-    display: block;
-    z-index: 11;
-    background: #222;
-}
-
-    .header.navbar {
-        border-width: 0;
-        border-radius: 0;
-        margin-bottom: 0;
-    }
-
-    .header.navbar.head-pane-hide .header-right-pane {
-        display: none;
-    }
-
     .header-right-pane {
         display: table-cell; 
         text-align: right; 
@@ -71,11 +53,6 @@ html, body {
         color: black;
     }
 
-.headerContent {
-    display: none;
-    z-index: 10;
-}
-
 /* Main Content Customization */
 
 .row {
@@ -87,10 +64,6 @@ html, body {
     height: 100%;
 }
 
-.row.content.show-header-content .headerContent {
-    display: inline;
-}
-
 .row.content.sidebar-hide .content-wrapper {
     left: 0px;
     width: 100%;
@@ -99,10 +72,6 @@ html, body {
 .row.content.sidebar-hide .sidebar.show {
     left:0px;
     z-index: 10006;
-}
-
-.row.content.sidebar-hide .sidebar {
-    left: -280px;
 }
 
 .sidebar {
@@ -117,10 +86,10 @@ html, body {
 
 .content-wrapper {
     margin: 0;
-    left: 280px;
     height: 100%;
     position:absolute;
-    width:calc(100% - 280px);
+    width:100%;
+    overflow: hidden;
 }
     .content-wrapper > .content {
         z-index: 7;
@@ -144,17 +113,18 @@ html, body {
     background-color:#fff;
     height:calc(100% - 40px);
     left: 0px;
-    position: absolute;
     border-right: 1px solid #e5e3e3;
 }
 
 .reading-pane {
-    width:calc(100% - 374px);
+    width:100%;
     background-color:#fff;
     height:calc(100% - 40px);
-    left:374px; 
-    position:absolute;
     overflow: auto;
+}
+
+#list-pane-div {
+    width: 100%;
 }
 
 .reading-pane.new-mail {
@@ -469,7 +439,7 @@ html, body {
 }
 
 #new_email_toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
-#rp-new_email_toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child, {
+#rp-new_email_toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child{
     margin-left: 0px;
 }
 
@@ -854,11 +824,6 @@ html, body {
 
 /* Defining Header Content */
 
-.headerContent .text-content {
-    font-size: 28px;
-    font-family: "Segoe UI Light","Segoe UI",Segoe,Tahoma,Helvetica,Arial,Sans-Serif;
-}
-
 #btnCloseButton {
     box-shadow: 0 0;
     background: transparent;
@@ -979,11 +944,6 @@ html, body {
     padding: 0px;
     overflow: hidden;
     height: 100%;
-}
-
-.e-dlg-overlay {
-    background-color: white;
-    opacity: 0.65;
 }
 
 .dlg-content-style {
@@ -1163,22 +1123,6 @@ html, body {
 .e-ddl.e-popup.e-multi-select-list-wrapper.e-control.ac-new-mail.e-popup-open,
 #txtSearch_popup, #rp-replyAllList_popup, #rp-moreList_popup, #rp-moreList2_popup, #moreList2_popup  {
     z-index: 100001;
-}
-
-.overlay-element {
-    width: 100%;
-    height: calc(100% + 50px);
-    position: absolute;
-    left: 0px; right: 0px;
-    top: 0px; bottom: 0px;
-    background-color: rgb(51,51,51);
-    opacity: 0.4;
-    z-index: 10005;
-    display: none;
-}
-
-.overlay-element.show1 {
-    display: block;
 }
 
 .popup-subjectstyle {
@@ -1405,15 +1349,11 @@ html, body {
         display: table-cell;
     }
     
-    .headerContent {
-        right: 0px;
-        position: absolute;
-    }
 }
 
 @media screen and (min-width:1200px) {
     .row.content.show-header-content .content-wrapper {
-        width:calc(100% - 610px);
+        width:100%;
     }
 }
 
@@ -1422,8 +1362,7 @@ html, body {
         width:474px;
     }
     .reading-pane {
-        width:calc(100% - 474px);
-        left:474px; 
+        width:100%;
     }
 }
 
@@ -1456,8 +1395,10 @@ html, body {
     #toolbar_mobile {
         display: block;
     }
-    .header.navbar {
-        display: none;
+    /* Animation to hide appbar  */
+    #appbar {
+        animation: hideAppBar 0.5s ease-out;
+        height: 0px;
     }
     .outlook-container {
         height: 100%;
@@ -1501,7 +1442,15 @@ html, body {
     .folder-pane.customScrollBar::-webkit-scrollbar-track {
         background-color: #fff;
     }
-    
+}
+
+@keyframes hideAppBar {
+    from {
+        height: 48px;
+    }
+    to {
+        height: 0px;
+    }
 }
 
 @media screen and (max-width:605px) {
@@ -1684,4 +1633,48 @@ html, body {
 }
 #rp-to {
     font-size: 12px;
+}
+
+/* Overriding appbar styles to achieve exact appbar alignment*/
+#appbar {
+    padding: 0px;
+}
+.header-right-pane {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#profile-div {
+    display: flex;
+}
+/* Overriding splitter styles to make splitBar transparent  */
+.e-splitter .e-split-bar.e-split-bar-horizontal,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active {
+  background-color:transparent;
+}
+/* Overriding splitter styles to remove resize handler Icon  */
+.e-splitter .e-split-bar.e-split-bar-horizontal .e-resize-handler,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover .e-resize-handler,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active .e-resize-handler {
+  display: none ;
+}
+/* Overriding the default positon to achive exact alignment */
+#reading-pane-div {
+    position: relative;
+}
+#list-pane-div {
+    position: relative;
+}
+.msg-top-margin {
+    top: 40px;
+}
+/* Styles for the of Right-SideBar Content */
+#headerSidebar {
+    background-color: #f4f4f4;
+}
+#headerSidebar .text-content {
+    font-size: 28px;
+    font-family: "Segoe UI Light","Segoe UI",Segoe,Tahoma,Helvetica,Arial,Sans-Serif;
 }

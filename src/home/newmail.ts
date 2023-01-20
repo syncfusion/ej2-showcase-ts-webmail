@@ -4,7 +4,7 @@
 import { IPages } from '../index';
 import { Toolbar, ClickEventArgs } from '@syncfusion/ej2-navigations';
 import { Button } from '@syncfusion/ej2-buttons';
-import { DropDownList, MultiSelect, FilteringEventArgs } from '@syncfusion/ej2-dropdowns';
+import { DropDownList,Mention, MultiSelect, FilteringEventArgs } from '@syncfusion/ej2-dropdowns';
 import { getContacts } from './datasource';
 import { Query } from '@syncfusion/ej2-data';
 
@@ -19,6 +19,11 @@ export let selectedToolbarItem: string = '';
 window.newmail = (): void => {
     renderToolbar();
     createMailForm();
+    let mentionObject: Mention = new Mention({
+    dataSource: getContacts(),
+    fields: { text: 'text' },
+    });
+    mentionObject.appendTo('#mailContentMessage');
 };
 
 function createMailForm(): void {
@@ -103,7 +108,7 @@ function createMailForm(): void {
         ],
         height: '100%',
         width: '100%',
-        overflowMode: 'Popup'
+        overflowMode: 'Scrollable'
     });
     toolbarMail.appendTo('#new_email_toolbar');
 }
@@ -167,10 +172,10 @@ export function resetSelectedToolbarItem(text: string): void {
 
 function clearMailForm(): void {
     if (autoCCList.value) {
-        autoCCList.value = [] as [string];
+        autoCCList.value = [] as string[];
     }
     if (autoToList.value) {
-        autoToList.value = [] as [string];
+        autoToList.value = [] as string[];
     }
     (document.getElementById('txtSubject') as HTMLInputElement).value = '';
     document.getElementById('mailContentMessage').innerHTML = '';

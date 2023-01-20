@@ -1,32 +1,5 @@
 <div class='row content'>
-    <div class='sidebar' style='height:100%' role='complementary'>
-        <div style='background-color:#fff; width:100%;height:100%'>
-            <div class="search-div">
-                <div class="search-device-section">
-                    <div style="width: 81%; float: left; height: 40px">
-                        <input type='text' id='txtSearch' tabindex='1' style="height: 40px" />
-                    </div>
-                    <div style="float: right; margin: 4px 0px;">
-                        <button id='btnSearch'></button>
-                    </div>
-                </div>
-                <div class="search-mobile-section">
-                    <div class='logo logo-style3 profile-pic' style='float:left'></div>
-                    <div class='messageHeader' style='float:left; height: 50px;'>
-                        <div id="username" style="font-size: 17px;color:#333"></div>
-                        <div id="usermail" style="font-size: 12px; color: #666"></div>
-                    </div>
-                    <div style="right:20px;position: absolute;">
-                        <button id='btnCloseButton1'></button>
-                    </div>
-                </div>
-            </div>
-            <div class="folder-pane customScrollBar">
-                <div id='tree'></div>
-            </div>
-        </div>
-    </div>
-    <div class="headerContent" style="z-index: 112; height: 100%; background-color: #f4f4f4; width: 330px;right:0; position: absolute">
+    <div id="headerSidebar">
         <div style="right:20px;position: absolute; top: 35px">
             <button id='btnCloseButton'></button>
         </div>
@@ -112,6 +85,33 @@
         </div>
     </div>
     <div class='content-wrapper' role='main'>
+        <div id="sideBar" class='sidebar' style='height:100%' role='complementary'>
+            <div style='background-color:#fff; width:100%;height:100%'>
+                <div class="search-div">
+                    <div class="search-device-section">
+                        <div style="width: 81%; float: left; height: 40px">
+                            <input type='text' id='txtSearch' tabindex='1' style="height: 40px" />
+                        </div>
+                        <div style="float: right; margin: 4px 0px;">
+                            <button id='btnSearch'></button>
+                        </div>
+                    </div>
+                    <div class="search-mobile-section">
+                        <div class='logo logo-style3 profile-pic' style='float:left'></div>
+                        <div class='messageHeader' style='float:left; height: 50px;'>
+                            <div id="username" style="font-size: 17px;color:#333"></div>
+                            <div id="usermail" style="font-size: 12px; color: #666"></div>
+                        </div>
+                        <div style="right:20px;position: absolute;">
+                            <button id='btnCloseButton1'></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="folder-pane customScrollBar">
+                    <div id='tree'></div>
+                </div>
+            </div>
+        </div>
         <div class='content' style='height:100%'>
             <div class="e-roottools" style='background-color:#fff; width:100%;color:white'>
                 <div id='toolbar_align'>
@@ -119,8 +119,9 @@
                 <div id='toolbar_mobile'>
                 </div>
             </div>
-            <div class='maincontent_pane' style='background-color:#fff; width:100%;height:calc(100% - 40px);color:white'>
-                <div class='message-pane customScrollBar' style='overflow: auto'>
+            <div class='maincontent_pane' style='background-color:#f4f9fd; width:100%;height:100%;color:white'>
+                <div id="splitter"></div>
+                <div id="list-pane-div" class='message-pane customScrollBar' style='overflow: auto'>
                     <div class="filter-section">
                         <div style='float: left; margin-top: 5px;'>
                             <span id="spanFilterText" style='font-size: 22px;color:#333333'>Inbox</span>
@@ -167,9 +168,6 @@
     </div>
     <div id='reading-pane-popup'>
 
-    </div>
-    <div class="overlay-element">
-    </div>
 </div>
 <ul id='treeContextMenu'></ul>
 <ul id='moveToMenuItems'></ul>

@@ -24,6 +24,7 @@
     "@syncfusion/ej2-dropdowns": "*",
     "@syncfusion/ej2-inputs": "*",
     "@syncfusion/ej2-popups": "*",
+    "@syncfusion/ej2-layouts": "*",
     "gulp": "^3.9.0",
     "gulp-sass": "^3.1.0",
     "gulp-typescript": "^2.13.0",
