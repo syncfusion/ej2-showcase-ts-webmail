@@ -1649,11 +1649,15 @@ html, body {
     display: flex;
 }
 /* Overriding splitter styles to make splitBar transparent  */
-.e-splitter .e-split-bar.e-split-bar-horizontal, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active {
+.e-splitter .e-split-bar.e-split-bar-horizontal,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active {
   background-color:transparent;
 }
 /* Overriding splitter styles to remove resize handler Icon  */
-.e-splitter .e-split-bar.e-split-bar-horizontal .e-resize-handler, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover .e-resize-handler, .e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active .e-resize-handler {
+.e-splitter .e-split-bar.e-split-bar-horizontal .e-resize-handler,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-hover .e-resize-handler,
+.e-splitter .e-split-bar.e-split-bar-horizontal.e-split-bar-active .e-resize-handler {
   display: none ;
 }
 /* Overriding the default positon to achive exact alignment */
