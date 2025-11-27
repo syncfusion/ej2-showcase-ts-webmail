@@ -34,7 +34,7 @@
     "tslint": "4.0.2",
     "run-sequence": "2.2.0",
     "typescript": "2.3.3",
-    "webpack": "2.5.1",
+    "webpack": "5.94.0",
     "webpack-stream": "^3.2.0"
   },
   "keywords": [
